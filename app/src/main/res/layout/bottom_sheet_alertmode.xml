@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:paddingBottom="@dimen/region_spacing">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/alert_mode_title"
+        android:textSize="18dp"
+        android:gravity="center"
+        android:textColor="@color/appPrimary"
+        android:background="@color/appLightGray" />
+
+    <TextView
+        android:id="@+id/alertMode_ring"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Ring"
+        android:textSize="18dp"
+        android:gravity="center_vertical"
+        android:paddingStart="32dp"
+        android:paddingEnd="0dp"
+        android:textColor="@color/appPrimary" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/appLightGray" />
+
+    <TextView
+        android:id="@+id/alertMode_Vibrate"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Vibrate"
+        android:textSize="18dp"
+        android:gravity="center_vertical"
+        android:paddingStart="32dp"
+        android:paddingEnd="0dp"
+        android:textColor="@color/appPrimary" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/appLightGray" />
+
+    <TextView
+        android:id="@+id/alertMode_ring_vibrate"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Ring &amp; Vibrate"
+        android:textSize="18dp"
+        android:gravity="center_vertical"
+        android:paddingStart="32dp"
+        android:paddingEnd="0dp"
+        android:textColor="@color/appPrimary" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/appLightGray" />
+
+</LinearLayout>

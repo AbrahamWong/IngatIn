@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/ringtone_list">
+
+    <TextView
+        android:id="@+id/ringtone_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="0dp"
+        android:paddingVertical="8dp"
+        android:text="Harcoded Text"
+        android:textSize="20dp"
+        android:fontFamily="@font/lato"/>
+
+    <View
+        android:id="@+id/rLine"
+        android:layout_width="300dp"
+        android:layout_height="1dp"
+        android:layout_below="@id/ringtone_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:background="@color/appSecondary" />
+
+</RelativeLayout>

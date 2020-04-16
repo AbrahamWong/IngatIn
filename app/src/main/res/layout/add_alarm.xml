@@ -6,50 +6,277 @@
     android:layout_height="match_parent"
     tools:context=".AddAlarm">
 
+    <!-- Choose time -->
     <RelativeLayout
         android:id="@+id/selectTime"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <TimePicker
+            android:id="@+id/chooseTime"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:theme="@style/TestScroll"
+            android:timePickerMode="spinner" />
 
     </RelativeLayout>
 
+    <!-- Menu -->
     <RelativeLayout
         android:id="@+id/alarmAttributes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectTime">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <!-- Repeat -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Repeater"
+            android:layout_marginVertical="@dimen/region_spacing">
+
+            <TextView
+                android:id="@+id/repeaterTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:fontFamily="@font/loew_bold"
+                android:text="Repeat"
+                android:textSize="@dimen/title_size" />
+
+            <TextView
+                android:id="@+id/repeaterName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/repeaterTitle"
+                android:layout_marginStart="40dp"
+                android:fontFamily="@font/loew"
+                android:text="None"
+                android:textSize="@dimen/name_size" />
+
+        </RelativeLayout>
+        <View
+            android:id="@+id/line1"
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:layout_below="@id/Repeater"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/region_spacing"
+            android:background="@color/appSecondary" />
+
+        <!-- RadioDays -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/RadioDays"
+            android:layout_marginVertical="@dimen/region_spacing"
+            android:layout_below="@id/line1">
+
+            <!-- daypicker from -->
+            <!-- https://stackoverflow.com/questions/43810161/android-day-picker-like-in-google-clock -->
+            <include
+                android:id="@+id/daypicker"
+                layout="@layout/daypicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+        <View
+            android:id="@+id/line2"
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/RadioDays"
+            android:background="@color/appSecondary" />
+
+        <!-- Alert Mode -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="changeAlertMode"
+            android:id="@+id/AlertMode"
+            android:layout_below="@id/line2"
+            android:layout_marginVertical="@dimen/region_spacing">
+
+            <TextView
+                android:id="@+id/aModeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:fontFamily="@font/loew_bold"
+                android:text="@string/alert_mode_title"
+                android:textSize="@dimen/title_size" />
+
+            <TextView
+                android:id="@+id/aModeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/aModeTitle"
+                android:layout_marginStart="40dp"
+                android:fontFamily="@font/loew"
+                android:text="@string/alert_mode_initial"
+                android:textSize="@dimen/name_size" />
+
+        </RelativeLayout>
+        <View
+            android:id="@+id/line3"
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:layout_below="@id/AlertMode"
+            android:layout_centerHorizontal="true"
+            android:background="@color/appSecondary" />
+
+        <!-- Ringtone -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="changeRingtone"
+            android:id="@+id/Ringtone"
+            android:layout_below="@id/line3"
+            android:layout_marginVertical="@dimen/region_spacing">
+
+            <TextView
+                android:id="@+id/ringtoneTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:fontFamily="@font/loew_bold"
+                android:text="@string/ringtone_title"
+                android:textSize="@dimen/title_size" />
+
+            <TextView
+                android:id="@+id/ringtoneName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ringtoneTitle"
+                android:layout_marginStart="40dp"
+                android:fontFamily="@font/loew"
+                android:text="@string/ringtone_initial"
+                android:textSize="@dimen/name_size" />
+
+        </RelativeLayout>
+        <View
+            android:id="@+id/line4"
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:layout_below="@id/Ringtone"
+            android:layout_centerInParent="true"
+            android:background="@color/appSecondary" />
+
+        <!-- Label -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="changeLabel"
+            android:id="@+id/Label"
+            android:layout_below="@id/Ringtone"
+            android:layout_marginVertical="@dimen/region_spacing">
+
+            <TextView
+                android:id="@+id/labelTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:fontFamily="@font/loew_bold"
+                android:text="@string/label_title"
+                android:textSize="@dimen/title_size" />
+
+            <TextView
+                android:id="@+id/labelName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/labelTitle"
+                android:layout_marginStart="40dp"
+                android:fontFamily="@font/loew"
+                android:text="@string/label_initial"
+                android:textSize="@dimen/name_size" />
+
+        </RelativeLayout>
+        <View
+            android:id="@+id/line5"
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:layout_below="@id/Label"
+            android:layout_centerHorizontal="true"
+            android:background="@color/appSecondary" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="changeLocation"
+            android:id="@+id/Location"
+            android:layout_below="@id/line5"
+            android:layout_marginVertical="@dimen/region_spacing">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/locationInfo">
+            <TextView
+                android:id="@+id/locationTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:fontFamily="@font/loew_bold"
+                android:text="Location"
+                android:textSize="@dimen/title_size" />
+
+            <TextView
+                android:id="@+id/locationName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/locationTitle"
+                android:layout_marginStart="40dp"
+                android:fontFamily="@font/loew"
+                android:text="Not set"
+                android:textSize="@dimen/name_size" />
+            </RelativeLayout>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="177dp"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@id/locationInfo" />
+
+        </RelativeLayout>
+        <View
+            android:id="@+id/line6"
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:layout_below="@id/Location"
+            android:layout_centerHorizontal="true"
+            android:background="@color/appSecondary" />
 
     </RelativeLayout>
 
+    <!-- Buttons -->
     <RelativeLayout
         android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/alarmAttributes"
-        android:gravity="center">
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/alarmAttributes">
 
         <Button
             android:id="@+id/backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/loew_bold"
+            android:fontFamily="@font/loew"
             android:onClick="backToMain"
+            android:textAllCaps="false"
+            android:background="@drawable/button_neutral"
+            android:textColor="@color/appPrimary"
             android:text="Back" />
 
         <Button
@@ -57,9 +284,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="64dp"
             android:layout_toEndOf="@id/backButton"
-            android:fontFamily="@font/loew_bold"
-            android:backgroundTint="@color/appSuccess"
+            android:background="@drawable/button_success"
+            android:fontFamily="@font/loew"
             android:onClick="addAlarmToSystem"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
             android:text="Add" />
 
     </RelativeLayout>

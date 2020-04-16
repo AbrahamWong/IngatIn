@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- https://stackoverflow.com/questions/43810161/android-day-picker-like-in-google-clock -->
+
+    <ToggleButton
+        android:id="@+id/tSunday"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:textOff="Sun"
+        android:textOn="Sun"
+        style="@style/toggleButton"
+        android:background="@drawable/toogle_bg" />
+    <ToggleButton
+        android:id="@+id/tMonday"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:textOff="Mon"
+        android:textOn="Mon"
+        style="@style/toggleButton"
+        android:background="@drawable/toogle_bg" />
+
+    <ToggleButton
+        android:id="@+id/tTuesday"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:textOff="Tue"
+        android:textOn="Tue"
+        style="@style/toggleButton"
+        android:background="@drawable/toogle_bg" />
+
+    <ToggleButton
+        android:id="@+id/tWednesday"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:textOff="Wed"
+        android:textOn="Wed"
+        style="@style/toggleButton"
+        android:background="@drawable/toogle_bg" />
+
+    <ToggleButton
+        android:id="@+id/tThursday"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:textOff="Thu"
+        android:textOn="Thu"
+        style="@style/toggleButton"
+        android:background="@drawable/toogle_bg" />
+
+    <ToggleButton
+        android:id="@+id/tFriday"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:textOff="Fri"
+        android:textOn="Fri"
+        style="@style/toggleButton"
+        android:background="@drawable/toogle_bg" />
+
+    <ToggleButton
+        android:id="@+id/tSaturday"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:textOff="Sat"
+        android:textOn="Sat"
+        style="@style/toggleButton"
+        android:background="@drawable/toogle_bg" />
+</LinearLayout>

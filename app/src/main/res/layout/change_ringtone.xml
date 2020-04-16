@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChangeRingtone">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/custom_ringtone"
+        android:layout_marginTop="36dp">
+
+        <TextView
+            android:id="@+id/ringtone_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Custom Ringtone"
+            android:textSize="20dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="0dp"
+            android:fontFamily="@font/lato"/>
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="119dp"
+            android:layout_marginTop="0dp"
+            android:layout_toRightOf="@id/ringtone_text"
+            android:background="@drawable/ic_navigate_next_gray_24dp" />
+
+        <View
+            android:id="@+id/line4"
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:layout_below="@id/ringtone_text"
+            android:layout_centerInParent="true"
+            android:background="@color/appSecondary" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/custom_ringtone"
+        android:id="@+id/system_ringtone"
+        android:layout_marginTop="32dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recycler_ringtone"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
