@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 // Credits to: CodingWithMitch -> https://www.youtube.com/watch?v=Vyqz_-sJGFk
 public class ChangeRingtone_RecyclerViewAdapter
@@ -27,6 +28,7 @@ public class ChangeRingtone_RecyclerViewAdapter
     private ArrayList<String> arrayRingtoneURI = new ArrayList<>();
     private Context context;
     private MediaPlayer mp;
+    private Uri rURI; private String rName;
 
     public ChangeRingtone_RecyclerViewAdapter(Context context, ArrayList<String> arrayRingtoneName,
                                               ArrayList<String> arrayRingtoneURI)
@@ -66,6 +68,8 @@ public class ChangeRingtone_RecyclerViewAdapter
 
                 Log.d(TAG, "Playing: " + arrayRingtoneName.get(position));
                 Toast.makeText(context, "Pressed " + arrayRingtoneName.get(position), Toast.LENGTH_SHORT).show();
+                setrURI(Uri.parse(arrayRingtoneURI.get(position)));
+                setrName(arrayRingtoneName.get(position));
             }
         });
     }
@@ -88,4 +92,27 @@ public class ChangeRingtone_RecyclerViewAdapter
         }
     };
 
+    public MediaPlayer getMp() {
+        return mp;
+    }
+
+    public void setMp(MediaPlayer mp) {
+        this.mp = mp;
+    }
+
+    public Uri getrURI() {
+        return rURI;
+    }
+
+    public void setrURI(Uri rURI) {
+        this.rURI = rURI;
+    }
+
+    public String getrName() {
+        return rName;
+    }
+
+    public void setrName(String rName) {
+        this.rName = rName;
+    }
 }

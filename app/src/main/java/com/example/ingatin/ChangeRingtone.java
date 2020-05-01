@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.media.RingtoneManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,6 +20,7 @@ import java.util.Map;
 public class ChangeRingtone extends AppCompatActivity {
     private ArrayList<String> rNames = new ArrayList<>();
     private ArrayList<String> rURI = new ArrayList<>();
+    public ChangeRingtone_RecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +47,23 @@ public class ChangeRingtone extends AppCompatActivity {
 
     private void initRecyclerView() {
         RecyclerView rv = findViewById(R.id.recycler_ringtone);
-        ChangeRingtone_RecyclerViewAdapter adapter = new ChangeRingtone_RecyclerViewAdapter(
+        adapter = new ChangeRingtone_RecyclerViewAdapter(
                 this, rNames, rURI);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    public void alarmRingtone(View view) {
+        if (adapter.getMp() != null) adapter.getMp().release();
+        Intent returnIntent = new Intent();
+        if (adapter.getrName() == null || adapter.getrURI() == null) {
+            setResult(Activity.RESULT_CANCELED, returnIntent);
+        }
+        else {
+            returnIntent.putExtra("RINGTONE_NAME", adapter.getrName());
+            returnIntent.putExtra("RINGTONE_URI", adapter.getrURI());
+            setResult(Activity.RESULT_OK, returnIntent);
+        }
+        finish();
+    }
 }

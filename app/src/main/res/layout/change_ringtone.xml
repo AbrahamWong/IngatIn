@@ -4,23 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/change_ringtone"
     tools:context=".ChangeRingtone">
 
     <RelativeLayout
+        android:id="@+id/custom_ringtone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/custom_ringtone"
         android:layout_marginTop="36dp">
 
         <TextView
             android:id="@+id/ringtone_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Custom Ringtone"
-            android:textSize="20dp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="0dp"
-            android:fontFamily="@font/lato"/>
+            android:fontFamily="@font/lato"
+            android:text="Custom Ringtone"
+            android:textSize="20dp" />
 
         <View
             android:layout_width="30dp"
@@ -35,25 +36,41 @@
             android:id="@+id/line4"
             android:layout_width="300dp"
             android:layout_height="1dp"
-            android:layout_marginTop="4dp"
             android:layout_below="@id/ringtone_text"
             android:layout_centerInParent="true"
+            android:layout_marginTop="4dp"
             android:background="@color/appSecondary" />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/custom_ringtone"
         android:id="@+id/system_ringtone"
-        android:layout_marginTop="32dp">
+        android:layout_width="match_parent"
+        android:layout_height="424dp"
+        android:layout_below="@id/custom_ringtone"
+        android:layout_marginTop="24dp">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_ringtone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/recycler_ringtone"/>
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/choose_ringtone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/system_ringtone"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/button_success"
+        android:fontFamily="@font/loew"
+        android:gravity="center"
+        android:text="@string/pick"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:onClick="alarmRingtone" />
+
 
 </RelativeLayout>

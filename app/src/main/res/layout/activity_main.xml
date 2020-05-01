@@ -33,7 +33,8 @@
             android:layout_below="@id/Clock"
             android:layout_centerInParent="true"
             android:fontFamily="monospace"
-            android:format24Hour="hh:mm"
+            android:format24Hour="k:mm"
+            android:format12Hour="@null"
             android:textColor="@android:color/black"
             android:textSize="@dimen/fontSize_time"
             android:textStyle="italic" />
