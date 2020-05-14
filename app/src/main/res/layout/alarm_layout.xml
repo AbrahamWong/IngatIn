@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/alarm_layout">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/appPrimary"/>
+
+    <RelativeLayout
+        android:id="@+id/alarm_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="18dp">
+
+        <TextView
+            android:id="@+id/alarm_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="27sp"
+            android:text="23" />
+
+        <TextView
+            android:id="@+id/colon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\:"
+            android:textSize="27sp"
+            android:layout_toEndOf="@id/alarm_hour"/>
+
+        <TextView
+            android:id="@+id/alarm_minute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="27sp"
+            android:layout_toEndOf="@id/colon"
+            android:text="59" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/alarm_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="18dp"
+        android:layout_toEndOf="@id/alarm_time">
+
+        <TextView
+            android:id="@+id/alarm_routines"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/name_size"
+            android:text="Once" />
+
+        <TextView
+            android:id="@+id/alarm_label"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/title_size"
+            android:text="Alarm label here"
+            android:lines="1"
+            android:layout_below="@id/alarm_routines"/>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/is_using_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_location_on_gray_30dp"
+        android:layout_toEndOf="@id/alarm_description"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginVertical="21dp" />
+
+    <Switch
+        android:id="@+id/alarm_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/is_using_location"
+        android:layout_marginVertical="21dp"
+        android:layout_marginHorizontal="16dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/appPrimary"
+        android:layout_below="@id/alarm_description"/>
+
+</RelativeLayout>

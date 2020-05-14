@@ -15,7 +15,8 @@
         android:textOff="Sun"
         android:textOn="Sun"
         style="@style/toggleButton"
-        android:background="@drawable/toogle_bg" />
+        android:background="@drawable/toogle_bg"
+        android:onClick="test"/>
     <ToggleButton
         android:id="@+id/tMonday"
         android:layout_marginLeft="3dp"
@@ -25,7 +26,8 @@
         android:textOff="Mon"
         android:textOn="Mon"
         style="@style/toggleButton"
-        android:background="@drawable/toogle_bg" />
+        android:background="@drawable/toogle_bg"
+        android:onClick="test"/>
 
     <ToggleButton
         android:id="@+id/tTuesday"
@@ -36,7 +38,8 @@
         android:textOff="Tue"
         android:textOn="Tue"
         style="@style/toggleButton"
-        android:background="@drawable/toogle_bg" />
+        android:background="@drawable/toogle_bg"
+        android:onClick="test"/>
 
     <ToggleButton
         android:id="@+id/tWednesday"
@@ -47,7 +50,8 @@
         android:textOff="Wed"
         android:textOn="Wed"
         style="@style/toggleButton"
-        android:background="@drawable/toogle_bg" />
+        android:background="@drawable/toogle_bg"
+        android:onClick="test"/>
 
     <ToggleButton
         android:id="@+id/tThursday"
@@ -58,7 +62,8 @@
         android:textOff="Thu"
         android:textOn="Thu"
         style="@style/toggleButton"
-        android:background="@drawable/toogle_bg" />
+        android:background="@drawable/toogle_bg"
+        android:onClick="test"/>
 
     <ToggleButton
         android:id="@+id/tFriday"
@@ -69,7 +74,8 @@
         android:textOff="Fri"
         android:textOn="Fri"
         style="@style/toggleButton"
-        android:background="@drawable/toogle_bg" />
+        android:background="@drawable/toogle_bg"
+        android:onClick="test"/>
 
     <ToggleButton
         android:id="@+id/tSaturday"
@@ -80,5 +86,6 @@
         android:textOff="Sat"
         android:textOn="Sat"
         style="@style/toggleButton"
-        android:background="@drawable/toogle_bg" />
+        android:background="@drawable/toogle_bg"
+        android:onClick="test"/>
 </LinearLayout>

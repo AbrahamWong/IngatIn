@@ -34,4 +34,9 @@ dependencies {
 
     implementation 'com.android.support:recyclerview-v7:29.0.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.libraries.places:places:2.2.0'
+
+    // to save alarm
+    implementation 'com.google.code.gson:gson:2.8.5'
 }

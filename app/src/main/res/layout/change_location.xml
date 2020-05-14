@@ -57,12 +57,14 @@
             android:gravity="center_vertical">
 
             <TextView
+                android:id="@+id/tv_location_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sample"
                 android:textSize="@dimen/title_size" />
 
             <TextView
+                android:id="@+id/tv_location_street"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/location_sample"
@@ -102,7 +104,8 @@
                 android:fontFamily="@font/loew"
                 android:text="@string/choose"
                 android:textAllCaps="false"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:onClick="sendResult" />
 
         </RelativeLayout>
 

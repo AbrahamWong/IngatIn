@@ -9,28 +9,43 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
 
 public class AddAlarm extends AppCompatActivity implements AlertMode_BottomSheetDialog.Listener{
+    public static final String NEW_ALARM = "new_alarm";
+
     // Data yang akan di-passing menggunakan format bahasa Indonesia
     // atau sesuai CDM yang terlampir
     private String labelAlarm;
-    private boolean alarmBerdering, alarmBergetar;
+    private boolean alarmBerdering, alarmBergetar, alarmAdaLokasi;
     private Uri alarmRingtone;  private String namaRingtone;
+    private ArrayList<Integer> alarmRutinitas = new ArrayList<>();
+
+    // Harusnya di tabel lokasi, tapi disetor di sini dulu.
+    private LatLng koordinat1, koordinat2;
+    private String namaLokasi;
 
     private TimePicker chooseTime;
+    public TextView repeaterName;
     public TextView alertMode;
     public TextView ringtoneName;
     public TextView alarmLabel;
+    public Switch useLocation; public TextView locationName;
 
     ToggleButton tSunday;       ToggleButton tMonday;
     ToggleButton tTuesday;      ToggleButton tWednesday;
@@ -59,10 +74,13 @@ public class AddAlarm extends AppCompatActivity implements AlertMode_BottomSheet
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_alarm);
+        repeaterName = findViewById(R.id.repeaterName); repeaterName.setText(R.string.label_initial);
         chooseTime = findViewById(R.id.chooseTime);
         alertMode = findViewById(R.id.aModeName);
         ringtoneName = findViewById(R.id.ringtoneName);
         alarmLabel = findViewById(R.id.labelName);
+        useLocation = findViewById(R.id.locationIsSet); useLocation.setChecked(false);
+        locationName = findViewById(R.id.locationName);
 
         // sigh, here we go
         tSunday     = findViewById(R.id.tSunday);
@@ -78,16 +96,44 @@ public class AddAlarm extends AppCompatActivity implements AlertMode_BottomSheet
         chooseTime.setCurrentMinute(Calendar.getInstance().get(Calendar.MINUTE));
     }
 
+    // Back Button
     public void backToMain(View view) {
         Intent backIntent = new Intent();
         setResult(RESULT_CANCELED, backIntent);
         finish();
     }
 
+    // Add button
     public void addAlarmToSystem(View view) {
-        // Intent addIntent = new Intent();
-        // setResult(RESULT_OK, addIntent);
-        // finish();
+         Intent addIntent = new Intent();
+         if (Build.VERSION.SDK_INT >= 23) {
+             Alarm newAlarm = new Alarm(
+                     labelAlarm != null ? getLabelAlarm(): "",
+                     alarmBerdering, alarmBergetar, alarmAdaLokasi,
+                     alarmRingtone != null ? alarmRingtone.toString() : "content://media/internal/audio/media/5",
+                     addAlarmRoutines(alarmRutinitas),
+                     namaRingtone,
+                     chooseTime.getHour(),
+                     chooseTime.getMinute()
+             );
+             addIntent.putExtra(NEW_ALARM, newAlarm);
+             setResult(RESULT_OK, addIntent);
+             finish();
+         }
+         else {
+             Alarm newAlarm = new Alarm(
+                     labelAlarm != null ? getLabelAlarm(): "",
+                     alarmBerdering, alarmBergetar, alarmAdaLokasi,
+                     alarmRingtone != null ? alarmRingtone.toString() : "content://media/internal/audio/media/5",
+                     addAlarmRoutines(alarmRutinitas),
+                     namaRingtone,
+                     chooseTime.getCurrentHour(),       // DEPRECATED IN API LEVEL 23, since
+                     chooseTime.getCurrentMinute()      // the writer uses API 21, this is necessary
+             );
+             addIntent.putExtra(NEW_ALARM, newAlarm);
+             setResult(RESULT_OK, addIntent);
+             finish();
+         }
     }
 
     public void changeLabel(View view) {
@@ -121,46 +167,57 @@ public class AddAlarm extends AppCompatActivity implements AlertMode_BottomSheet
         });
     }
 
-    public void smhTheToogleButtons() {
+    // onClick for the day toggle
+    public void test(View view) {
+        markedButtons = "";
         if(tSunday.isChecked()){
-            markedButtons +="Sun,";
+            markedButtons +="Sun, ";
         }
         if(tMonday.isChecked()){
-            markedButtons +="Mon,";
+            markedButtons +="Mon, ";
         }
         if(tTuesday.isChecked()){
-            markedButtons +="Tue,";
+            markedButtons +="Tue, ";
         }
         if(tWednesday.isChecked()){
-            markedButtons +="Wed,";
+            markedButtons +="Wed, ";
         }
         if(tThursday.isChecked()){
-            markedButtons +="Thu,";
+            markedButtons +="Thu, ";
         }
         if(tFriday.isChecked()){
-            markedButtons +="Fri,";
+            markedButtons +="Fri, ";
         }
         if(tSaturday.isChecked()){
             markedButtons +="Sat";
         }
+
+        if (tSunday.isChecked() && tMonday.isChecked() && tTuesday.isChecked()
+                && tWednesday.isChecked() && tThursday.isChecked() && tFriday.isChecked()
+                && tSaturday.isChecked()) {
+            markedButtons = "Everyday";
+        }
+
+        repeaterName.setText(markedButtons);
     }
 
+    // BottomSheetDialog when changing alarm mode
     public void changeAlertMode(View view) {
         AlertMode_BottomSheetDialog alertMode = new AlertMode_BottomSheetDialog();
         alertMode.show(getSupportFragmentManager(), "alertMode_BottomSheet");
     }
 
+    // New intent to change Ringtone
     public void changeRingtone(View view) {
         Intent ringtoneIntent = new Intent(this, ChangeRingtone.class);
         startActivityForResult(ringtoneIntent, 1);
     }
 
+    // new intent to change Location
     public void changeLocation(View view) {
-//        Intent locationIntent = new Intent(this, ChangeLocation.class);
         Intent locationIntent = new Intent(this, ChangeLocation.class);
-        startActivity(locationIntent);
+        startActivityForResult(locationIntent, 2);
     }
-
 
     // startActivityForResult indent handler here
     @Override
@@ -174,6 +231,32 @@ public class AddAlarm extends AppCompatActivity implements AlertMode_BottomSheet
             }
             if (resultCode == Activity.RESULT_CANCELED) {}
         }
+        else if(requestCode == 2) {
+            if(resultCode == Activity.RESULT_OK) {
+                LatLng exactCoordinate = new LatLng(data.getDoubleExtra(ChangeLocation.LOCATION_LATITUDE, 0),
+                        data.getDoubleExtra(ChangeLocation.LOCATION_LONGITUDE, 0));
+                koordinat1 = new LatLng(exactCoordinate.latitude - 0.001, exactCoordinate.longitude - 0.001);
+                koordinat2 = new LatLng(exactCoordinate.latitude + 0.001, exactCoordinate.longitude + 0.001);
+                useLocation.setChecked(true);
+                alarmAdaLokasi = useLocation.isChecked();
+                namaLokasi = data.getStringExtra(ChangeLocation.LOCATION_ADDRESS);
+                locationName.setText(namaLokasi);
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {}
+        }
+    }
+
+    // Other functions: set alarmRutinitas to track days
+    public ArrayList<Integer> addAlarmRoutines(ArrayList<Integer> arrayList) {
+        arrayList.add(0, tSunday.isChecked() ? 1 : 0);
+        arrayList.add(1, tMonday.isChecked() ? 1 : 0);
+        arrayList.add(2, tTuesday.isChecked() ? 1 : 0);
+        arrayList.add(3, tWednesday.isChecked() ? 1 : 0);
+        arrayList.add(4, tThursday.isChecked() ? 1 : 0);
+        arrayList.add(5, tFriday.isChecked() ? 1 : 0);
+        arrayList.add(6, tSaturday.isChecked() ? 1 : 0);
+
+        return arrayList;
     }
 
     // Setter and Getter
